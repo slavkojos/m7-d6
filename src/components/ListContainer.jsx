@@ -11,7 +11,7 @@ export default function ListContainer(props) {
       {list.length > 0 ? (
         <Box>
           {list.map((item) => {
-            return <ListItem key={item.index} index={item.index} title={item.title} />;
+            return <ListItem key={item.index} index={item.index} title={item.title} time={item.time} />;
           })}
           <Button
             palette="danger"

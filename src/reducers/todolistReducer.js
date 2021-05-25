@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
 export const todoList = createSlice({
   name: "todolist",
@@ -13,6 +14,7 @@ export const todoList = createSlice({
         index: action.payload.index,
         title: action.payload.title,
         completed: false,
+        time: `${dayjs().format("HH:mm:ss")}`,
       };
       state.push(todo);
     },
@@ -20,8 +22,8 @@ export const todoList = createSlice({
       return state.filter((todo) => todo.index !== action.payload);
     },
     toggleComplete: (state, action) => {
-      const todo = state[action.payload.index];
-      todo.completed = !todo.completed;
+      const todo = state.find((item) => item.index === action.payload);
+      todo.completed = true;
     },
     reset: (state, action) => {
       return (state = []);
