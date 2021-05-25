@@ -10,19 +10,21 @@ export const todoList = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       const todo = {
-        title: action.payload,
+        index: action.payload.index,
+        title: action.payload.title,
+        completed: false,
       };
       state.push(todo);
     },
     deleteItem: (state, action) => {
-      state.filter((todo, i) => i !== action.payload.index);
+      return state.filter((todo) => todo.index !== action.payload);
     },
     toggleComplete: (state, action) => {
       const todo = state[action.payload.index];
       todo.completed = !todo.completed;
     },
     reset: (state, action) => {
-      state.value += action.payload;
+      return (state = []);
     },
   },
 });
